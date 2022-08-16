@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class GanadorController extends Controller
+{
+    public function index()
+    {
+        $landings = Landing::paginate();
+
+        return view('landing.index', compact('landings'))
+            ->with('i', (request()->input('page', 1) - 1) * $landings->perPage());
+    }
+}
